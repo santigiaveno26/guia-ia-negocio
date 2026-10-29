@@ -1,0 +1,411 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>La IA trabajando en tu negocio · Guía práctica para pymes</title>
+<meta name="description" content="Guía práctica para pymes, comercios e industrias: qué tareas delegar a la IA, con qué herramienta y cómo empezar esta semana. 54 páginas, 50 prompts y planilla de Excel.">
+<meta property="og:title" content="La IA trabajando en tu negocio">
+<meta property="og:description" content="Qué delegar a la IA, con qué herramienta y cómo empezar esta semana. Sin palabras técnicas.">
+<meta property="og:image" content="img/portada.png">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono&display=swap">
+<style>
+/* Pagina de venta de la guia. Misma identidad que la guia y la carta de servicios: banda oscura, acento naranja */
+:root{
+  --bg:#ffffff; --ink:#1c2420; --muted:#56615b; --line:#d6dbd7; --soft:#f4f6f4; --cream:#fff4dc;
+  --steel:#151c19; --steel-2:#1f2824; --accent:#d98a1f; --accent-hover:#c27713; --accent-ink:#1a1206;
+  --display:"Archivo","Bahnschrift","Arial Narrow",Arial,sans-serif;
+  --body:"IBM Plex Sans","Segoe UI",Arial,sans-serif;
+  --mono:"IBM Plex Mono",Consolas,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 var(--body);-webkit-font-smoothing:antialiased}
+img{max-width:100%;height:auto;display:block}
+a{color:inherit}
+.wrap{max-width:1080px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+@media (min-width:720px){.wrap{padding-left:32px;padding-right:32px}}
+section{padding:72px 0}
+h1,h2,h3{font-family:var(--display);line-height:1.08;text-wrap:balance;margin:0}
+h2{font-size:clamp(28px,4.4vw,40px);font-weight:800;margin-bottom:16px}
+.kicker{font:700 12.5px/1 var(--display);letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:14px;display:block}
+.lead{font-size:18px;color:var(--muted);max-width:62ch;margin:0 0 32px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;background:var(--accent);color:var(--accent-ink);font:800 17px/1 var(--display);text-decoration:none;padding:18px 28px;border-radius:8px;transition:background .15s,transform .15s;min-height:56px;text-align:center}
+.btn:hover{background:var(--accent-hover);transform:translateY(-1px)}
+.btn:focus-visible{outline:3px solid #fff;outline-offset:3px}
+.btn.ghost{background:transparent;color:inherit;border:2px solid currentColor}
+.btn.ghost:hover{background:rgba(255,255,255,.08)}
+
+/* Hero */
+.hero{background:var(--steel);color:#eef1ef;padding:56px 0 72px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px;font-size:13px;color:#9fada6;margin-bottom:48px;flex-wrap:wrap}
+.top b{color:#fff;font-weight:600}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr);gap:56px;align-items:center}
+.tag{display:inline-block;background:var(--accent);color:var(--accent-ink);font:700 12px/1 var(--display);letter-spacing:.1em;text-transform:uppercase;padding:7px 9px;border-radius:4px}
+.hero h1{font-size:clamp(38px,6.4vw,64px);font-weight:800;margin:20px 0}
+.hero h1 span{color:var(--accent)}
+.hero .lead{color:#c3ccc7}
+.buy{display:flex;flex-wrap:wrap;align-items:center;gap:16px 24px}
+.price{font-family:var(--display)}
+.price b{display:block;font-size:34px;font-weight:800;color:#fff;line-height:1}
+.price small{font:400 13px var(--body);color:#9fada6}
+.cover{position:relative;justify-self:center;max-width:320px;width:100%}
+.cover img{width:100%;border-radius:4px;box-shadow:0 30px 60px rgba(0,0,0,.5),0 0 0 1px rgba(255,255,255,.08);transform:rotate(2deg)}
+.cover .badge{position:absolute;left:-18px;bottom:28px;background:#fff;color:var(--ink);border-radius:8px;padding:10px 14px;font:700 14px/1.25 var(--display);box-shadow:0 10px 30px rgba(0,0,0,.35)}
+.cover .badge span{display:block;font:400 12px var(--body);color:var(--muted)}
+.facts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-top:56px;border-top:1px solid #33403a;padding-top:28px}
+.facts div{min-width:0}
+.facts b{display:block;font:800 26px/1 var(--display);color:#fff;margin-bottom:6px}
+.facts span{font-size:14px;color:#9fada6}
+
+/* Problema */
+.pains{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;list-style:none;padding:0;margin:0 0 28px}
+.pains li{background:var(--soft);border-left:4px solid #c8574a;padding:16px 18px;min-width:0}
+.turn{font:700 22px/1.35 var(--display);max-width:52ch;margin:0}
+.turn span{color:var(--accent)}
+
+/* Que incluye */
+.alt{background:var(--soft)}
+.includes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.card{background:#fff;border:1px solid var(--line);border-radius:10px;padding:24px;min-width:0}
+.card .ico{width:44px;height:44px;border-radius:8px;background:var(--steel);color:var(--accent);display:grid;place-items:center;margin-bottom:16px}
+.card h3{font-size:21px;font-weight:700;margin-bottom:8px}
+.card p{margin:0 0 10px;color:var(--muted);font-size:15px}
+.card ul{margin:0;padding-left:18px;font-size:15px}
+.card li{margin-bottom:4px}
+
+/* Indice */
+.toc{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+.part{border-top:4px solid var(--accent);padding-top:16px;min-width:0}
+.part h3{font-size:20px;margin-bottom:12px}
+.part ol{list-style:none;margin:0;padding:0}
+.part li{display:grid;grid-template-columns:30px minmax(0,1fr);padding:9px 0;border-bottom:1px solid var(--line);font-size:15px}
+.part li b{font-family:var(--display);color:var(--accent)}
+
+/* Muestra */
+.sample{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px;align-items:start}
+.prompt{background:#fff;border:1px solid var(--line);border-left:4px solid var(--accent);padding:18px 20px;font:14px/1.6 var(--mono);white-space:pre-wrap;overflow-wrap:anywhere;margin:0 0 16px}
+.prompt::before{content:"Copiá y pegá";display:block;font:600 11px var(--body);letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:6px}
+.hoy{background:var(--cream);border-left:4px solid var(--accent);padding:16px 18px}
+.hoy b{display:block;font:800 12px var(--display);letter-spacing:.12em;text-transform:uppercase;color:#a8650a;margin-bottom:4px}
+.pages{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.pages img{border:1px solid var(--line);border-radius:3px;box-shadow:0 8px 24px rgba(21,28,25,.12)}
+.pages figcaption{font-size:12.5px;color:var(--muted);margin-top:6px}
+
+/* Para quien */
+.fit{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.fit .card h3{display:flex;align-items:center;gap:10px}
+.fit ul{list-style:none;padding:0}
+.fit li{padding:8px 0 8px 28px;position:relative;border-bottom:1px dashed var(--line)}
+.fit li::before{position:absolute;left:0;top:8px;font-weight:700}
+.yes li::before{content:"✓";color:#3f8f5a}
+.no li::before{content:"✕";color:#c8574a}
+
+/* Autor */
+.author{background:var(--steel);color:#eef1ef}
+.author-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:48px}
+.author p{color:#c3ccc7}
+.cases{display:grid;gap:14px}
+.case{background:var(--steel-2);border:1px solid #33403a;border-radius:10px;padding:18px 20px}
+.case b{display:block;font:700 17px var(--display);color:#fff;margin-bottom:4px}
+.case span{font-size:15px;color:#c3ccc7}
+
+/* Gratis */
+.free{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:24px;align-items:center;background:var(--cream);border:1px solid #f0dcb0;border-radius:12px;padding:32px}
+.free h3{font-size:26px;margin-bottom:8px}
+.free p{margin:0;color:var(--muted)}
+.free .btn{background:var(--steel);color:#fff}
+.free .btn:hover{background:#000}
+
+/* FAQ */
+.faq{max-width:780px}
+details{border-bottom:1px solid var(--line)}
+summary{cursor:pointer;list-style:none;padding:20px 40px 20px 0;font:700 18px/1.35 var(--display);position:relative}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";position:absolute;right:4px;top:16px;font-size:26px;color:var(--accent);transition:transform .2s}
+details[open] summary::after{transform:rotate(45deg)}
+details p{margin:0 0 20px;color:var(--muted)}
+
+/* Cierre */
+.final{background:var(--accent);color:var(--accent-ink);text-align:center}
+.final h2{font-size:clamp(30px,5vw,48px);max-width:18ch;margin:0 auto 16px}
+.final p{max-width:56ch;margin:0 auto 28px;font-size:18px}
+.final .btn{background:var(--steel);color:#fff}
+.final .btn:hover{background:#000}
+.final small{display:block;margin-top:16px;font-size:14px}
+footer{background:var(--steel);color:#9fada6;font-size:14px;padding:28px 0}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
+
+/* Barra fija en celular */
+.sticky{position:fixed;left:0;right:0;bottom:0;z-index:10;background:var(--steel);border-top:1px solid #33403a;padding:10px max(16px,env(safe-area-inset-left,0px)) calc(10px + env(safe-area-inset-bottom,0px));display:none;align-items:center;justify-content:space-between;gap:12px;transform:translateY(110%);transition:transform .25s}
+.sticky.show{transform:none}
+.sticky b{color:#fff;font:800 20px var(--display)}
+.sticky small{display:block;color:#9fada6;font-size:12px}
+.sticky .btn{min-height:48px;padding:12px 20px;font-size:16px}
+
+@media (max-width:860px){
+  section{padding:56px 0}
+  .hero-grid,.sample,.author-grid{grid-template-columns:minmax(0,1fr);gap:36px}
+  .hero{padding-top:28px}
+  .top{margin-bottom:28px}
+  .cover{max-width:200px}
+  .cover .badge{left:auto;right:-12px}
+  .facts{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .includes,.toc{grid-template-columns:minmax(0,1fr)}
+  .pains,.fit{grid-template-columns:minmax(0,1fr)}
+  .free{grid-template-columns:minmax(0,1fr);padding:24px}
+  .sticky{display:flex}
+  body{padding-bottom:76px}
+}
+@media (max-width:480px){
+  .buy .btn{width:100%}
+  .top span:last-child{display:none}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<!--
+  PARA COMPLETAR ANTES DE PUBLICAR:
+  1. Botones de compra (los que tienen data-pago): hoy abren WhatsApp. Cuando tengas el link de Mercado Pago, reemplazá su href por ese link.
+  2. Precio: buscá "$14.900" y cambialo si querés otro.
+-->
+
+<header class="hero">
+  <div class="wrap">
+    <div class="top"><span><b>Santiago Giaveno</b> · Técnico Universitario en IA (UNR)</span><span>Las Parejas, Santa Fe</span></div>
+    <div class="hero-grid">
+      <div>
+        <span class="tag">Guía práctica para pymes · 2026</span>
+        <h1>La IA trabajando en <span>tu negocio</span></h1>
+        <p class="lead">Qué tareas delegar a la inteligencia artificial, con qué herramienta y cómo empezar esta semana. Para dueños de comercios, industrias y servicios. Sin palabras técnicas.</p>
+        <div class="buy">
+          <a class="btn" href="https://wa.me/5493471332479?text=Hola%20Santiago%2C%20quiero%20comprar%20la%20gu%C3%ADa%20%22La%20IA%20trabajando%20en%20tu%20negocio%22" data-pago id="cta-hero">Quiero la guía
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+          <div class="price"><b>$14.900</b><small>Pago único · te llega en el día</small></div>
+        </div>
+      </div>
+      <div class="cover">
+        <img src="img/portada.png" alt="Tapa de la guía La IA trabajando en tu negocio" width="909" height="1286">
+        <div class="badge">PDF + Excel<span>Para leer en el celu o imprimir</span></div>
+      </div>
+    </div>
+    <div class="facts">
+      <div><b>54</b><span>páginas prácticas</span></div>
+      <div><b>50+</b><span>prompts para copiar y pegar</span></div>
+      <div><b>30 días</b><span>plan paso a paso</span></div>
+      <div><b>1</b><span>planilla de Excel lista para usar</span></div>
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <span class="kicker">¿Te pasa esto?</span>
+    <h2>Sabés que la IA sirve. No sabés por dónde empezar.</h2>
+    <p class="lead">Probaste ChatGPT un par de veces, te pareció interesante, y quedó ahí. Mientras tanto, tu día sigue así:</p>
+    <ul class="pains">
+      <li>Contestás las <b>mismas preguntas</b> por WhatsApp veinte veces por día.</li>
+      <li>Los <b>presupuestos</b> se arman a mano, a la noche, y quedan sin seguimiento.</li>
+      <li>Un proveedor aumentó y <b>no sabés qué precios</b> quedaron desactualizados.</li>
+      <li>Cobrar te incomoda y <b>las deudas se estiran</b>.</li>
+      <li>Lo importante del negocio está en <b>tu cabeza</b> y en varios Excel.</li>
+      <li>Todo lo que encontrás sobre IA está pensado para <b>otro tipo de empresa</b>.</li>
+    </ul>
+    <p class="turn">Esta guía es lo que le explico a un cliente sentado en su oficina: <span>qué puede hacer la IA hoy por tu negocio, cómo pedírselo y qué cuidar.</span></p>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap">
+    <span class="kicker">Qué recibís</span>
+    <h2>Todo para empezar hoy</h2>
+    <p class="lead">La promesa es concreta: en 30 días, al menos 5 tareas de tu negocio funcionando con IA, y sabiendo cuántas horas por semana te ahorran.</p>
+    <div class="includes">
+      <article class="card">
+        <div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V3H6.5A2.5 2.5 0 0 0 4 5.5z"/><path d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5"/></svg></div>
+        <h3>La guía en PDF</h3>
+        <p>54 páginas, 14 capítulos, organizada por áreas del negocio.</p>
+        <ul><li>Paso a paso con ejemplos reales</li><li>Un "Hacé hoy" al final de cada capítulo</li><li>Casos de pymes de la zona</li></ul>
+      </article>
+      <article class="card">
+        <div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 9h8M8 13h6"/><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+        <h3>50+ prompts listos</h3>
+        <p>Los textos exactos para pegarle a la IA. Cambiás lo que está entre corchetes y listo.</p>
+        <ul><li>Atención, ventas y cobranzas</li><li>Excel, precios y facturas</li><li>Equipo y decisiones</li></ul>
+      </article>
+      <article class="card">
+        <div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18"/></svg></div>
+        <h3>Planilla de Excel</h3>
+        <p>Funciona en Excel y en Google Sheets.</p>
+        <ul><li>Calculadora de precios: te avisa qué productos quedaron con margen bajo</li><li>Plan de 30 días con avance</li><li>Medidor de horas ahorradas</li></ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <span class="kicker">Contenido</span>
+    <h2>Qué vas a aprender</h2>
+    <p class="lead">No hace falta leerla de corrido: empezá por el área que más te cuesta.</p>
+    <div class="toc">
+      <div class="part">
+        <h3>1 · Entender la IA sin humo</h3>
+        <ol>
+          <li><b>1</b>Qué es la IA hoy, en criollo</li>
+          <li><b>2</b>Las herramientas: cuál usar para qué</li>
+          <li><b>3</b>Cómo pedirle las cosas: el método de 4 pasos</li>
+          <li><b>4</b>Cuidado de datos: qué sí y qué no subir</li>
+        </ol>
+      </div>
+      <div class="part">
+        <h3>2 · La IA en cada área</h3>
+        <ol>
+          <li><b>5</b>Atención al cliente y WhatsApp</li>
+          <li><b>6</b>Ventas y marketing</li>
+          <li><b>7</b>Administración y cobranzas</li>
+          <li><b>8</b>Números: Excel, precios y facturas</li>
+          <li><b>9</b>Organización y equipo</li>
+          <li><b>10</b>Decisiones: la IA como consultor</li>
+        </ol>
+      </div>
+      <div class="part">
+        <h3>3 · Ponerlo en marcha</h3>
+        <ol>
+          <li><b>11</b>Plan de 30 días</li>
+          <li><b>12</b>Medir si sirve</li>
+          <li><b>13</b>El siguiente nivel: cuando la IA trabaja sola</li>
+          <li><b>14</b>Mitos y errores comunes</li>
+          <li><b>+</b>Anexos: prompts, glosario, fichas</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap">
+    <span class="kicker">Mirá cómo es por dentro</span>
+    <h2>Práctica, no teoría</h2>
+    <div class="sample">
+      <div>
+        <p class="lead" style="margin-bottom:20px">Un ejemplo del capítulo 8. Un proveedor te manda lista nueva y en dos minutos sabés cuánto subir cada producto para no perder margen:</p>
+        <pre class="prompt">Mi proveedor aumentó [X]% desde el [fecha]. Estos son los productos afectados con su costo y precio actual: [tabla]
+
+Calculá el nuevo costo y el nuevo precio de venta para mantener mi margen actual. Redondeá a múltiplos de [100]. Devolvelo en una tabla.</pre>
+        <div class="hoy"><b>Hacé hoy</b>Abrí la calculadora de precios de la planilla, cargá tus 10 productos más vendidos y fijate el margen real de cada uno.</div>
+      </div>
+      <div class="pages">
+        <figure style="margin:0"><img src="img/muestra-cap3.png" alt="Página del capítulo 3: cómo pedirle las cosas a la IA" loading="lazy" width="909" height="1286"><figcaption>Cap. 3 · El método</figcaption></figure>
+        <figure style="margin:0"><img src="img/muestra-cap8.png" alt="Página del capítulo 8: planillas y análisis de ventas" loading="lazy" width="909" height="1286"><figcaption>Cap. 8 · Números</figcaption></figure>
+        <figure style="margin:0"><img src="img/muestra-plan.png" alt="Página del capítulo 11: plan de 30 días" loading="lazy" width="909" height="1286"><figcaption>Cap. 11 · Plan</figcaption></figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <span class="kicker">¿Es para vos?</span>
+    <h2>Para quién es esta guía</h2>
+    <div class="fit">
+      <div class="card yes">
+        <h3>Es para vos si…</h3>
+        <ul>
+          <li>Tenés o administrás una pyme, comercio, taller, industria o estudio.</li>
+          <li>Usás WhatsApp y Excel, pero no sos "de la tecnología".</li>
+          <li>Querés ahorrar horas por semana con herramientas gratis.</li>
+          <li>Buscás ejemplos de la realidad argentina, no de Silicon Valley.</li>
+        </ul>
+      </div>
+      <div class="card no">
+        <h3>No es para vos si…</h3>
+        <ul>
+          <li>Sos programador y querés aprender a crear modelos de IA.</li>
+          <li>Buscás una fórmula mágica para hacerte rico con IA.</li>
+          <li>No vas a dedicarle ni 30 minutos por día durante un mes.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="author">
+  <div class="wrap author-grid">
+    <div>
+      <span class="kicker">Quién la escribió</span>
+      <h2>Santiago Giaveno</h2>
+      <p>Técnico Universitario en Inteligencia Artificial (UNR), de Las Parejas, Santa Fe.</p>
+      <p>Trabajo implementando IA en pymes del interior: fábricas, empresas de construcción, fabricantes de maquinaria. Esta guía junta lo que les explico a mis clientes en la primera reunión, para que puedas empezar por tu cuenta.</p>
+    </div>
+    <div class="cases">
+      <div class="case"><b>Empresa de casas modulares</b><span>Sistema de gestión completo: compras, stock, ventas y ganancia real por obra, con facturas leídas con IA y asesor virtual de ventas.</span></div>
+      <div class="case"><b>Fábrica de cocinas industriales</b><span>Datos unificados que se actualizan solos, facturas con IA, panel de gerencia y predicción de materiales (~92% de acierto en pruebas).</span></div>
+      <div class="case"><b>Fabricante de maquinaria agrícola</b><span>Asistente de WhatsApp 24/7 con la información técnica de la empresa: entiende audios y fotos de fallas y deriva a una persona.</span></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="free">
+      <div>
+        <span class="kicker">¿Todavía no te decidís?</span>
+        <h3>Empezá gratis: 15 tareas que la IA ya puede hacer en tu negocio</h3>
+        <p>Un checklist de 4 páginas con los prompts listos. Pedilo por WhatsApp y te lo mando.</p>
+      </div>
+      <a class="btn" id="cta-free" href="https://wa.me/5493471332479?text=Hola%20Santiago%2C%20quiero%20el%20checklist%20gratis%20de%2015%20tareas%20con%20IA" target="_blank" rel="noopener">Quiero el checklist gratis</a>
+    </div>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap faq">
+    <span class="kicker">Preguntas frecuentes</span>
+    <h2>Dudas comunes</h2>
+    <details><summary>¿Necesito saber de computación?</summary><p>No. Si sabés mandar un WhatsApp y abrir un Excel, tenés todo lo que hace falta. La guía está escrita sin palabras técnicas.</p></details>
+    <details><summary>¿Tengo que pagar alguna herramienta de IA?</summary><p>No. Todo lo de la guía funciona con las versiones gratis de ChatGPT, Claude, Gemini o Copilot. En el capítulo 2 te explico cuándo vale la pena pagar y cuándo no.</p></details>
+    <details><summary>¿Sirve para mi rubro?</summary><p>Sí, si tu negocio escribe mensajes, arma presupuestos, cobra, maneja precios o tiene empleados. Los ejemplos cubren comercio, industria, talleres, construcción, agro y servicios.</p></details>
+    <details><summary>¿Cómo la recibo?</summary><p>Después de pagar me mandás el comprobante por WhatsApp o mail y te envío el PDF y la planilla de Excel en el día. La podés leer en el celular, la computadora o imprimirla.</p></details>
+    <details><summary>¿Es seguro poner datos de mi negocio en la IA?</summary><p>Depende de qué datos. El capítulo 4 explica un sistema de semáforo muy simple para saber qué podés usar tranquilo, qué con cuidado y qué nunca tenés que subir.</p></details>
+    <details><summary>¿Y si quiero que alguien lo implemente por mí?</summary><p>El capítulo 13 explica qué se puede automatizar en una pyme. Si querés ayuda, ofrezco un diagnóstico gratis de 20 minutos por WhatsApp.</p></details>
+  </div>
+</section>
+
+<section class="final">
+  <div class="wrap">
+    <h2>Empezá hoy por una sola tarea</h2>
+    <p>Dentro de 30 días vas a mirar para atrás y no vas a entender cómo trabajabas sin esto.</p>
+    <a class="btn" href="https://wa.me/5493471332479?text=Hola%20Santiago%2C%20quiero%20comprar%20la%20gu%C3%ADa%20%22La%20IA%20trabajando%20en%20tu%20negocio%22" data-pago id="cta-final">Comprar la guía · $14.900</a>
+    <small>PDF + planilla de Excel · Pago único · Te llega por WhatsApp o mail en el día</small>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Santiago Giaveno · Las Parejas, Santa Fe</span>
+    <span>WhatsApp +54 3471-332479 · santiagogiaveno23@gmail.com</span>
+  </div>
+</footer>
+
+<div class="sticky" id="sticky" aria-hidden="true">
+  <div><b>$14.900</b><small>Guía + 50 prompts + Excel</small></div>
+  <a class="btn" href="https://wa.me/5493471332479?text=Hola%20Santiago%2C%20quiero%20comprar%20la%20gu%C3%ADa%20%22La%20IA%20trabajando%20en%20tu%20negocio%22" data-pago tabindex="-1">Comprar</a>
+</div>
+
+<script>
+  // Barra de compra fija en celular: aparece cuando el boton principal sale de pantalla y se oculta en el cierre
+  (function(){
+    var bar=document.getElementById('sticky'), hero=document.getElementById('cta-hero'), fin=document.getElementById('cta-final');
+    if(!('IntersectionObserver' in window)) return;
+    var heroOut=false, finIn=false;
+    function upd(){ var on=heroOut&&!finIn; bar.classList.toggle('show',on); bar.setAttribute('aria-hidden',on?'false':'true'); }
+    new IntersectionObserver(function(e){ heroOut=!e[0].isIntersecting; upd(); }).observe(hero);
+    new IntersectionObserver(function(e){ finIn=e[0].isIntersecting; upd(); }).observe(fin);
+  })();
+</script>
+</body>
+</html>
